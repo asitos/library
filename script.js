@@ -3,7 +3,6 @@ const modal = document.getElementById('add-book-modal');
 const form = document.getElementById('add-book-form');
 const booksGrid = document.getElementById('books-grid');
 
-// New elements for enhanced functionality
 const filterButtons = document.querySelectorAll('.filter-btn');
 const genreFilter = document.getElementById('genre-filter');
 const totalBooksEl = document.getElementById('total-books');
@@ -49,7 +48,6 @@ form.addEventListener('submit', (e) => {
     const genre = document.getElementById('book-genre').value;
     const isRead = document.getElementById('is-read').checked;
     
-    // Basic validation
     if (!title || !author || !pages || !genre) {
         alert('Please fill in all fields');
         return;
@@ -62,7 +60,6 @@ form.addEventListener('submit', (e) => {
     
     const newBook = new Book(title, author, pages, genre, isRead);
     
-    // Check if book already exists
     if (library.isInLibrary(newBook)) {
         alert(`The book "${title}" is already in your library!`);
         return;
@@ -145,7 +142,7 @@ class Library {
                         bookData.title, 
                         bookData.author, 
                         bookData.pages, 
-                        bookData.genre || 'Other', // Handle legacy books without genre
+                        bookData.genre || 'Other', 
                         bookData.isRead
                     )
                 )
@@ -176,32 +173,31 @@ function loadExistingBooks() {
 }
 
 
-// Load books when the page loads and set up event listeners
 document.addEventListener('DOMContentLoaded', () => {
     loadExistingBooks();
     setupEventListeners();
 });
 
-// Setup all event listeners
+
 function setupEventListeners() {
     // Filter button handlers
     filterButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            // Remove active class from all buttons
+
             filterButtons.forEach(button => button.classList.remove('active'));
             
-            // Add active class to clicked button
+
             e.target.classList.add('active');
             
-            // Set current filter
+
             currentFilter = e.target.dataset.filter;
             
-            // Apply filter
+
             filterBooks();
         });
     });
     
-    // Genre filter handler
+
     if (genreFilter) {
         genreFilter.addEventListener('change', (e) => {
             currentGenre = e.target.value;
@@ -221,15 +217,15 @@ function clearAllBooks() {
 
 function toggleRead(e) {
     const bookCard = e.target.closest('.book-card');
-    const title = bookCard.querySelector('.book-title').textContent.slice(1, -1); // Remove quotes
+    const title = bookCard.querySelector('.book-title').textContent.slice(1, -1); 
     const book = library.getBook(title);
     
     book.isRead = !book.isRead;
     
-    // Update dataset for filtering
+    
     bookCard.dataset.isRead = book.isRead;
     
-    // Update the book in library and save to storage
+    
     library.updateBook(title, book);
     
     const readBtn = e.target;
@@ -248,7 +244,7 @@ function toggleRead(e) {
 
 function removeBook(e) {
     const bookCard = e.target.closest('.book-card');
-    const title = bookCard.querySelector('.book-title').textContent.slice(1, -1); // Remove quotes
+    const title = bookCard.querySelector('.book-title').textContent.slice(1, -1); 
     
     library.removeBook(title);
     bookCard.remove();
@@ -281,7 +277,6 @@ const createBookCard = (book) => {
     pages.textContent = `${book.pages} pages`
     removeBtn.textContent = 'Remove'
 
-    // Store book data for search/filter functionality
     bookCard.dataset.title = book.title.toLowerCase()
     bookCard.dataset.author = book.author.toLowerCase()
     bookCard.dataset.genre = book.genre.toLowerCase()
@@ -305,7 +300,6 @@ const createBookCard = (book) => {
     booksGrid.appendChild(bookCard)
 }
 
-// Statistics update function
 function updateStats() {
     const totalBooks = library.books.length;
     const booksRead = library.books.filter(book => book.isRead).length;
@@ -318,7 +312,7 @@ function updateStats() {
     totalPagesEl.textContent = totalPages.toLocaleString();
 }
 
-// Filter functionality
+
 function filterBooks() {
     const bookCards = document.querySelectorAll('.book-card');
     
@@ -338,29 +332,28 @@ function filterBooks() {
     });
 }
 
-// Enhanced loadExistingBooks function
 function loadExistingBooks() {
-    // Clear existing books from display
+
     booksGrid.innerHTML = '';
     
-    // Load books from library
+
     library.books.forEach(book => {
         createBookCard(book);
     });
     
-    // Update statistics
+
     updateStats();
 }
 
-// Keyboard shortcuts
+
 document.addEventListener('keydown', (e) => {
-    // Existing escape key handler
+
     if (e.key === 'Escape' && modal.classList.contains('active')) {
         hideModal();
         return;
     }
     
-    // New shortcuts
+
     if (e.ctrlKey || e.metaKey) {
         switch(e.key.toLowerCase()) {
             case 'n':
@@ -372,7 +365,7 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Enhanced clearAllBooks function
+
 function clearAllBooks() {
     if (confirm('Are you sure you want to remove all books? This cannot be undone.')) {
         library.clearStorage();
@@ -382,7 +375,7 @@ function clearAllBooks() {
     }
 }
 
-// Add some sample books function (for testing)
+
 function addSampleBooks() {
     const sampleBooks = [
         new Book('The Hobbit', 'J.R.R. Tolkien', 295, 'Fantasy', true),
