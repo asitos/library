@@ -7,6 +7,7 @@ body {
     flex-direction: column;
     background-color: black;
     margin: 0;
+    cursor: url('./assets/cursor/DETERMINATION.svg'), auto;
 }
 
 body.modal-open::before {
@@ -25,6 +26,7 @@ body.modal-open::before {
 
 .header a {
     text-decoration: none;
+    cursor: url('./assets/cursor/DETERMINATION.svg'), pointer;
 }
 
 .header-title {
@@ -44,7 +46,7 @@ body.modal-open::before {
 .header-title span {
     display: inline-block;
     transition: transform 0.3s ease;
-    cursor: pointer;
+    cursor: url('./assets/cursor/DETERMINATION.svg'), pointer;
     transform-origin: center;
     padding: 0 0.1rem;
 }
@@ -92,6 +94,15 @@ body.modal-open::before {
     text-align: center;
     color: #ff9900 !important;
     border-color: #ff9900 !important;
+    transition: all 0.2s ease;
+}
+
+.genre-filter:hover {
+    color: #ffff33;
+    border: 2px solid #ffff33;
+    cursor: url('./assets/cursor/DETERMINATION.svg'), pointer;
+    transition: all 0.3s ease;
+    transform: scale(1.05);
 }
 
 .filter-buttons {
@@ -178,15 +189,14 @@ body.modal-open::before {
     border-radius: 12px;
     padding: 0.5rem 1rem;
     transition: all 0.2s ease;
-    cursor: pointer;
+    cursor: url('./assets/cursor/DETERMINATION.svg'), pointer;
     font-size: 24px;
-
 }
 
 #add-book-btn:hover {
     color: #ffff33;
     border: 2px solid #ffff33;
-    cursor: grab;
+    cursor: url('./assets/cursor/DETERMINATION.svg'), pointer;
     transition: all 0.3s ease;
     transform: translateY(-4px);
 }
@@ -209,6 +219,7 @@ body.modal-open::before {
     height: 24px;
     display: block;
     transition: transform 0.3s ease-in-out;
+    cursor: url('./assets/cursor/DETERMINATION.svg'), pointer;
 }
 
 .github-logo:hover {
@@ -254,6 +265,7 @@ body.modal-open::before {
     color: inherit;
     background-color: inherit;
     border: 2px solid white;
+    cursor: url('./assets/cursor/DETERMINATION.svg'), text;
 }
 
 .is-read label {
@@ -266,14 +278,14 @@ body.modal-open::before {
     border-radius: 12px;
     padding: 0.5rem 1rem;
     transition: all 0.2s ease;
-    cursor: pointer;
+    /* cursor: pointer; */
     font-size: 24px;
 }
 
 .btn:hover,.add-book-form button:hover {
     color: #ffff33;
     border: 2px solid #ffff33;
-    cursor: grab;
+    cursor: url('./assets/cursor/DETERMINATION.svg'), pointer;
     transition: all 0.3s ease;
     transform: scale(1.1);
 }
