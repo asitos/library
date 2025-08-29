@@ -67,6 +67,83 @@ body.modal-open::before {
     padding: 2rem;
 }
 
+.controls-section {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.search-filter-section {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.genre-filter {
+    max-width: 300px;
+    width: 100%;
+    font-size: 1.6rem;
+    text-align: center;
+    color: #ff9900 !important;
+    border-color: #ff9900 !important;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 1rem;
+    /* flex-wrap: wrap; */
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem;
+    min-width: 100px;
+    transition: all 0.3s ease;
+}
+
+.filter-btn.active {
+    background-color: #ff9900;
+    color: black;
+}
+
+.stats-section {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    border: 2px solid #ff9900;
+    border-radius: 8px;
+    min-width: 100px;
+}
+
+.stat-number {
+    font-size: 2rem;
+    color: #ffff33;
+    font-weight: bold;
+}
+
+.stat-label {
+    font-size: 1.2rem;
+    color: #ff9900;
+}
+
 .books-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -83,11 +160,9 @@ body.modal-open::before {
     border: 2px solid #ff9900;
     padding: 0.5rem 1rem;
     transition: all 0.2s ease;
-
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    margin-top: 2rem;
+    justify-content: center;
 }
 
 #add-book-btn span {
@@ -234,6 +309,18 @@ body.modal-open::before {
     color: #ffff33;
 }
 
+.book-author {
+    font-size: 1.4rem;
+    color: #ff9900;
+}
+
+.book-genre {
+    font-size: 1.2rem;
+    color: #ffaa55;
+    font-style: italic;
+    opacity: 0.9;
+}
+
 .button-group {
     display: flex;
     flex-direction: column;
@@ -272,6 +359,10 @@ body.modal-open::before {
     .books-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+    
+    .stats-section {
+        gap: 1rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -282,6 +373,28 @@ body.modal-open::before {
     
     .main-content {
         padding: 1rem;
+    }
+    
+    .controls-section {
+        gap: 1rem;
+    }
+    
+    .stats-section {
+        gap: 0.5rem;
+    }
+    
+    .stat-item {
+        min-width: 80px;
+        padding: 0.5rem;
+    }
+    
+    .filter-buttons {
+        gap: 0.5rem;
+    }
+    
+    .genre-filter {
+        font-size: 1.4rem;
+        max-width: 250px;
     }
 }
 

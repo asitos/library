@@ -38,12 +38,42 @@
         </div> -->
     </header>
     <main class="main-content">
-        <button id="add-book-btn" class="btn btn-add">
-            <!-- <img src="./assets/plus.svg" alt="plus icon"> -->
-            <span>
-                + Add Book
-            </span>
-        </button>
+        <div class="controls-section">
+            <button id="add-book-btn" class="btn btn-add">
+                <!-- <img src="./assets/plus.svg" alt="plus icon"> -->
+                <span>
+                    + Add Book
+                </span>
+            </button>
+            
+            <div class="search-filter-section">
+                <div class="filter-buttons">
+                    <button id="filter-all" class="btn filter-btn active" data-filter="all">All</button>
+                    <button id="filter-read" class="btn filter-btn" data-filter="read">Read</button>
+                    <button id="filter-unread" class="btn filter-btn" data-filter="unread">Unread</button>
+                </div>
+                
+                <select id="genre-filter" class="input genre-filter">
+                    <option value="">All Genres</option>
+                    <option value="Fiction">Fiction</option>
+                    <option value="Non-Fiction">Non-Fiction</option>
+                    <option value="Science Fiction">Science Fiction</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Mystery">Mystery</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Thriller">Thriller</option>
+                    <option value="Biography">Biography</option>
+                    <option value="History">History</option>
+                    <option value="Self-Help">Self-Help</option>
+                    <option value="Technical">Technical</option>
+                    <option value="Manga">Manga</option>
+                    <option value="Yuri/Yaoi">Yuri/Yaoi</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            
+        </div>
+        
         <div id="books-grid" class="books-grid"></div>
     </main>
     <div id="add-book-modal" class="modal">
@@ -51,13 +81,47 @@
             <h3>Add new book</h3>
                 <input type="text" id="book-title" class="input" placeholder="Title" required maxlength="100">
                 <input type="text" id="book-author" class="input" placeholder="Author" required maxlength="100">
-                <input type="number" id="book-pages" class="input" placeholder="Pages" required max="10000">
+                <input type="number" id="book-pages" class="input" placeholder="Pages" required max="10000" min="1">
+                <select id="book-genre" class="input" required>
+                    <option value="">Select Genre</option>
+                    <option value="Fiction">Fiction</option>
+                    <option value="Non-Fiction">Non-Fiction</option>
+                    <option value="Science Fiction">Science Fiction</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Mystery">Mystery</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Thriller">Thriller</option>
+                    <option value="Biography">Biography</option>
+                    <option value="History">History</option>
+                    <option value="Self-Help">Self-Help</option>
+                    <option value="Technical">Technical</option>
+                    <option value="Manga">Manga</option>
+                    <option value="Yuri/Yaoi">Yuri/Yaoi</option>
+                </select>
             <div class="is-read">
                 <label for="is-read">Have you read it?</label>
                 <input type="checkbox" id="is-read" class="checkbox">
             </div>
             <button class="btn btn-light-green" type="submit">Submit</button>
         </form>
+    </div>
+    <div class="stats-section">
+        <div class="stat-item">
+            <span class="stat-number" id="total-books">0</span>
+            <span class="stat-label">Total Books</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number" id="books-read">0</span>
+            <span class="stat-label">Read</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number" id="books-unread">0</span>
+            <span class="stat-label">Unread</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number" id="total-pages">0</span>
+            <span class="stat-label">Total Pages</span>
+        </div>
     </div>
     <footer class="footer">
         <p>
