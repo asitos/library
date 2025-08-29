@@ -6,6 +6,20 @@ a library app, with a touch from **undertale**, a game i really like, powered by
 
 - live at: https://asitos.github.io/library/
 
+## screenshots
+
+<img src="./screenshots/librarbyScreenshot1.png" alt="LIBRARBY Main Interface" width="800">
+
+*Main interface showing the library with book cards and filtering options*
+
+<img src="./screenshots/librarbyScreenshot2.png" alt="LIBRARBY Add Book Modal" width="800">
+
+*Add new book modal with form fields for title, author, pages, genre, and read status*
+
+<img src="./screenshots/librarbyScreenshot3.png" alt="LIBRARBY Filtered View" width="800">
+
+*Filtered view demonstrating the genre and read/unread filtering functionality*
+
 ## what it does 
 - add and save book entries (title, author, genre, read status), stored in your browser’s localStorage.
 - filter books by their status(read/unread) or genre.
