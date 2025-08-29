@@ -32,12 +32,30 @@ document.addEventListener('keydown', (e) => {
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     
-    const title = document.getElementById('book-title').value;
-    const author = document.getElementById('book-author').value;
+    const title = document.getElementById('book-title').value.trim();
+    const author = document.getElementById('book-author').value.trim();
     const pages = document.getElementById('book-pages').value;
     const isRead = document.getElementById('is-read').checked;
     
+    // Basic validation
+    if (!title || !author || !pages) {
+        alert('Please fill in all fields');
+        return;
+    }
+    
+    if (pages <= 0) {
+        alert('Please enter a valid number of pages');
+        return;
+    }
+    
     const newBook = new Book(title, author, pages, isRead);
+    
+    
+    if (library.isInLibrary(newBook)) {
+        alert(`The book "${title}" is already in your library!`);
+        return;
+    }
+    
     library.addBook(newBook);
     createBookCard(newBook);
     
@@ -62,16 +80,19 @@ class Book {
 class Library {
     constructor() {
         this.books = []
+        this.loadFromStorage()
     }
 
     addBook(newBook) {
         if (!this.isInLibrary(newBook)) {
             this.books.push(newBook)
+            this.saveToStorage()
         }
     }
 
     removeBook(title) {
         this.books = this.books.filter((book) => book.title !== title)
+        this.saveToStorage()
     }
 
     getBook(title) {
@@ -81,16 +102,77 @@ class Library {
     isInLibrary(newBook) {
         return this.books.some((book) => book.title === newBook.title)
     }
+
+    updateBook(title, updatedBook) {
+        const index = this.books.findIndex(book => book.title === title)
+        if (index !== -1) {
+            this.books[index] = updatedBook
+            this.saveToStorage()
+        }
+    }
+
+    saveToStorage() {
+        try {
+            localStorage.setItem('library-books', JSON.stringify(this.books))
+        } catch (error) {
+            console.error('Error saving to localStorage:', error)
+        }
+    }
+
+    loadFromStorage() {
+        try {
+            const savedBooks = localStorage.getItem('library-books')
+            if (savedBooks) {
+                const booksData = JSON.parse(savedBooks)
+                this.books = booksData.map(bookData => 
+                    new Book(bookData.title, bookData.author, bookData.pages, bookData.isRead)
+                )
+            }
+        } catch (error) {
+            console.error('Error loading from localStorage:', error)
+            this.books = []
+        }
+    }
+
+    clearStorage() {
+        try {
+            localStorage.removeItem('library-books')
+            this.books = []
+        } catch (error) {
+            console.error('Error clearing localStorage:', error)
+        }
+    }
 }
 
 const library = new Library()
 
+
+function loadExistingBooks() {
+    library.books.forEach(book => {
+        createBookCard(book)
+    })
+}
+
+
+document.addEventListener('DOMContentLoaded', loadExistingBooks);
+
+
+function clearAllBooks() {
+    if (confirm('Are you sure you want to remove all books? This cannot be undone.')) {
+        library.clearStorage();
+        booksGrid.innerHTML = '';
+        console.log('All books cleared from library and localStorage');
+    }
+}
+
 function toggleRead(e) {
     const bookCard = e.target.closest('.book-card');
-    const title = bookCard.querySelector('p').textContent.slice(1, -1); // Remove quotes
+    const title = bookCard.querySelector('p').textContent.slice(1, -1); 
     const book = library.getBook(title);
     
     book.isRead = !book.isRead;
+    
+    library.updateBook(title, book);
     
     const readBtn = e.target;
     if (book.isRead) {
@@ -106,7 +188,7 @@ function toggleRead(e) {
 
 function removeBook(e) {
     const bookCard = e.target.closest('.book-card');
-    const title = bookCard.querySelector('p').textContent.slice(1, -1); // Remove quotes
+    const title = bookCard.querySelector('p').textContent.slice(1, -1);  
     
     library.removeBook(title);
     bookCard.remove();
