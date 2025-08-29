@@ -7,8 +7,10 @@ a library app, with a touch from **undertale**, a game i really like, powered by
 - live at: https://asitos.github.io/library/
 
 ## what it does 
-- add and save book entries (title, author, maybe read), stored in your browser’s localStorage.
-- UI inspired by **undertale**, with pixel-cute text boxes and retro charm  .
+- add and save book entries (title, author, genre, read status), stored in your browser’s localStorage.
+- filter books by their status(read/unread) or genre.
+- stats for total books, read, unread, and total pages
+- UI inspired by **undertale**, with pixel-cute text boxes and retro charm.
 - minimalist and adorable!
 
 ## technologies used
